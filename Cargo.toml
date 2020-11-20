@@ -1,0 +1,16 @@
+[package]
+name = "term-code"
+version = "0.3.1"
+description = "Exit codes for process termination"
+keywords = ["cli", "exit-codes", "sysexit"]
+categories = ["command-line-interface", "os", "no-std"]
+repository = "https://github.com/assert-rs/term-code"
+documentation = "https://docs.rs/term-code"
+readme = "README.md"
+authors = ["Ed Page <eopage@gmail.com>"]
+edition = "2018"
+license = "MIT"
+
+[badges]
+azure-devops = { project = "assert-rs", pipeline = "term-code" }
+codecov = { repository = "assert-rs/term-code" }
