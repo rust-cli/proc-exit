@@ -1,12 +1,12 @@
-# term-code
+# proc-exit
 
 > Exit codes for process termination
 
-[![Build Status](https://dev.azure.com/crate-ci/crate-ci/_apis/build/status/term-code?branchName=master)](https://dev.azure.com/crate-ci/crate-ci/_build/latest?definitionId=6&branchName=master)
-[![codecov](https://codecov.io/gh/assert-rs/term-code/branch/master/graph/badge.svg)](https://codecov.io/gh/assert-rs/term-code)
+[![Build Status](https://dev.azure.com/crate-ci/crate-ci/_apis/build/status/proc-exit?branchName=master)](https://dev.azure.com/crate-ci/crate-ci/_build/latest?definitionId=6&branchName=master)
+[![codecov](https://codecov.io/gh/assert-rs/proc-exit/branch/master/graph/badge.svg)](https://codecov.io/gh/assert-rs/proc-exit)
 [![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
-![License](https://img.shields.io/crates/l/term-code.svg)
-[![Crates Status](https://img.shields.io/crates/v/term-code.svg)](https://crates.io/crates/term-code)
+![License](https://img.shields.io/crates/l/proc-exit.svg)
+[![Crates Status](https://img.shields.io/crates/v/proc-exit.svg)](https://crates.io/crates/proc-exit)
 
 ## Install
 
@@ -14,7 +14,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-term-code = "0.1"
+proc-exit = "0.1"
 ```
 
 ## Relevant crates
@@ -52,5 +52,5 @@ submitted for inclusion in the work by you, as defined in the Apache-2.0
 license, shall be dual licensed as above, without any additional terms or
 conditions.
 
-[Crates.io]: https://crates.io/crates/term-code
-[Documentation]: https://docs.rs/term-code
+[Crates.io]: https://crates.io/crates/proc-exit
+[Documentation]: https://docs.rs/proc-exit
