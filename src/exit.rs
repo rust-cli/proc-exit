@@ -2,8 +2,8 @@ use std::io::Write;
 
 /// Error type for exiting programs.
 pub struct Exit {
-    pub code: crate::Code,
-    pub msg: Option<Box<dyn std::fmt::Display>>,
+    code: crate::Code,
+    msg: Option<Box<dyn std::fmt::Display>>,
 }
 
 impl Exit {
