@@ -156,13 +156,37 @@ impl Code {
         Self::from(status)
     }
 
-    /// Limit the code to valid values.
+    /// Coerce the code to a portable value
+    #[cfg(feature = "portable")]
     pub const fn coerce(self) -> Option<Self> {
-        if self.is_valid() {
+        if self.is_portable() {
             Some(self)
         } else {
             None
         }
+    }
+
+    #[cfg(not(feature = "portable"))]
+    const fn coerce(self) -> Option<Self> {
+        if self.is_portable() {
+            Some(self)
+        } else {
+            None
+        }
+    }
+
+    /// Test if provided exit code is portable across platforms.
+    ///
+    /// While Windows has wider types for return codes, Unix OS's tend to only support 8-bits,
+    /// stripping off the higher order bits.
+    #[cfg(feature = "portable")]
+    pub const fn is_portable(self) -> bool {
+        0 <= self.0 && self.0 <= 255
+    }
+
+    #[cfg(not(feature = "portable"))]
+    const fn is_portable(self) -> bool {
+        true
     }
 
     pub fn process_exit(self) -> ! {
@@ -239,18 +263,6 @@ impl Code {
         } else {
             false
         }
-    }
-
-    /// Test if provided exit code is valid, that is within the 0–255 (inclusive)
-    /// range.
-    #[cfg(feature = "portable")]
-    pub const fn is_valid(self) -> bool {
-        0 <= self.0 && self.0 <= 255
-    }
-
-    #[cfg(not(feature = "portable"))]
-    pub const fn is_valid(self) -> bool {
-        true
     }
 
     pub const fn raw(self) -> i32 {
