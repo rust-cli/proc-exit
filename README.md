@@ -8,6 +8,15 @@
 ![License](https://img.shields.io/crates/l/proc-exit.svg)
 [![Crates Status](https://img.shields.io/crates/v/proc-exit.svg)](https://crates.io/crates/proc-exit)
 
+## Features
+
+- `i32` newtype for exit codes
+  - Can represent any valid exit code
+  - Type safe, operations are restricted to what is valid for exit codes
+- Includes standard exit codes and signal exit codes
+- Integrate with `main`, `std::process`, and `std::io::Error`
+- Supports exiting silently (error message reported through another means)
+
 ## Install
 
 Add to your `Cargo.toml`:
@@ -20,28 +29,46 @@ proc-exit = "0.1"
 ## Relevant crates
 
 Other crates that might be useful in testing command line programs.
-* [escargot][escargot] for more control over configuring the crate's binary.
-* [duct][duct] for orchestrating multiple processes.
-  * or [commandspec] for easier writing of commands
-* [rexpect][rexpect] for testing interactive programs.
-* [`assert_cmd`][assert_cmd] for CLI fixtures and assertions.
-  * or [tempfile][tempfile] for scratchpad directories.
-* [dir-diff][dir-diff] for testing file side-effects.
+- [duct][duct] for orchestrating multiple processes.
+  - or [commandspec][commandspec] for easier writing of commands
+- [rexpect][rexpect] for controlling interactive programs.
+- [`assert_cmd`][assert_cmd] can be reused to simplify controlling CLIs
 
-[escargot]: http://docs.rs/escargot
-[rexpect]: https://crates.io/crates/rexpect
-[dir-diff]: https://crates.io/crates/dir-diff
-[tempfile]: https://crates.io/crates/tempfile
 [duct]: https://crates.io/crates/duct
+[rexpect]: https://crates.io/crates/rexpect
 [assert_cmd]: https://crates.io/crates/assert_cmd
 [commandspec]: https://crates.io/crates/commandspec
+
+## Related crates
+
+Some crates that fill a similar role include:
+- [sysexit][sysexit]
+  - Uses an enum, making certain states unrepresentabnle
+  - Includes signals
+  - Integrates with `std::process` and `std::io::Error`
+  - Doesn't integrate with `main`
+- [exit-code][exit-code]
+  - `i32` constants and helper methods
+  - Doesn't include signals
+  - Doesn't integrate with `main`, `std::process`, or `std::io::Error`
+- [exitcode][exitcode]
+  - `i32` constants and helper methods
+  - Doesn't include signals
+  - Doesn't integrate with `main`, `std::process`, or `std::io::Error`
+- [exitfailure][exitfailure]
+  - Allows `Display`able errors to be used with [`?` in `main()`](https://github.com/rust-lang/rust/issues/43301)
+
+[sysexit]: https://crates.io/crates/sysexit
+[exit-code]: https://crates.io/crates/exit-code
+[exitcode]: https://crates.io/crates/exitcode
+[exitfailure]: https://crates.io/crates/exitfailure
 
 ## License
 
 Licensed under either of
 
- * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
- * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+ - Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+ - MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.
 
