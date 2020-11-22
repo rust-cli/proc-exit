@@ -14,3 +14,8 @@ license = "MIT"
 [badges]
 azure-devops = { project = "assert-rs", pipeline = "proc-exit" }
 codecov = { repository = "assert-rs/proc-exit" }
+
+[features]
+default = ["portable"]
+# Coerce exit codes to `u8` for consistent, cross-platform, behavior
+portable = []

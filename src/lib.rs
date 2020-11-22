@@ -7,6 +7,18 @@
 //! - Integrate with `main`, `std::process`, and `std::io::Error`
 //! - Supports exiting silently (error message reported through another means)
 //!
+//! ## Install
+//!
+//! Add to your `Cargo.toml`:
+//!
+//! ```toml
+//! [dependencies]
+//! proc-exit = "0.1"
+//! ```
+//!
+//! Feature flags:
+//! - `portable`:  Coerce exit codes to `u8` for consistent, cross-platform, behavior
+//!
 //! # Example
 //!
 //! ```

@@ -241,8 +241,14 @@ impl Code {
 
     /// Test if provided exit code is valid, that is within the 0–255 (inclusive)
     /// range.
+    #[cfg(feature = "portable")]
     pub const fn is_valid(self) -> bool {
         0 <= self.0 && self.0 <= 255
+    }
+
+    #[cfg(not(feature = "portable"))]
+    pub const fn is_valid(self) -> bool {
+        true
     }
 
     pub const fn raw(self) -> i32 {
