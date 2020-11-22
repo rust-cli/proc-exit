@@ -224,6 +224,8 @@ impl Code {
 
     /// Tests if the provided exit code is reserved, and has a special meaning in
     /// shells.
+    #[allow(clippy::needless_bool)]
+    #[allow(clippy::if_same_then_else)]
     pub const fn is_reserved(self) -> bool {
         let code = self.0;
         if Self::SUCCESS.0 <= code && code <= Self::UNKNOWN.0 {

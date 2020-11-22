@@ -9,7 +9,7 @@ pub struct Exit {
 impl Exit {
     pub fn new(code: crate::Code) -> Self {
         Self {
-            code: code.into(),
+            code: code,
             msg: None,
         }
     }
