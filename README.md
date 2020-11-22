@@ -46,7 +46,7 @@ Other crates that might be useful in testing command line programs.
 
 Some crates that fill a similar role include:
 - [sysexit][sysexit]
-  - Uses an enum, making certain states unrepresentabnle
+  - Uses an enum, making certain states unpresentable
   - Includes signals
   - Integrates with `std::process` and `std::io::Error`
   - Doesn't integrate with `main`
