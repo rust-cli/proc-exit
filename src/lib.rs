@@ -13,7 +13,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! proc-exit = "0.1"
+//! proc-exit = "1.0.0"
 //! ```
 //!
 //! Feature flags:
