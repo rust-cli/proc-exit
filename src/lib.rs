@@ -26,15 +26,15 @@
 //!     // Simple but Macro-less `main`
 //!     // - Fast compiles
 //!     // - Composable with other features
-//!     use proc_exit::ProcessExitResultExt;
-//!     run().process_exit();
+//!     let result = run();
+//!     proc_exit::exit(result);
 //! }
 //!
-//! fn run() -> Result<(), proc_exit::Exit> {
+//! fn run() -> proc_exit::ExitResult {
 //!     // Integrates directly with `std::io::Error`, returning the right exit code.
 //!     let exit_status = std::process::Command::new("true")
 //!          .status()?;
-//!     // Can pass `Command` exit codes right up
+//!     // Can pass `Command` exit codes right up, when appropriate
 //!     proc_exit::Code::from_status(exit_status).ok()?;
 //!
 //!     proc_exit::Code::SUCCESS.ok()
@@ -94,6 +94,6 @@ mod code;
 mod exit;
 
 pub use code::Code;
-pub use exit::Exit;
-pub use exit::ProcessExitResultExt;
 pub use exit::WithCodeResultExt;
+pub use exit::{exit, report};
+pub use exit::{Exit, ExitResult};
