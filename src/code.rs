@@ -193,7 +193,7 @@ impl Code {
         std::process::exit(self.coerce().unwrap_or_default().raw())
     }
 
-    pub fn ok(self) -> Result<(), crate::Exit> {
+    pub fn ok(self) -> crate::ExitResult {
         if self.0 == Self::SUCCESS.0 {
             Ok(())
         } else {

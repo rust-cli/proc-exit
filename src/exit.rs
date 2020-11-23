@@ -1,5 +1,7 @@
 use std::io::Write;
 
+pub type ExitResult = Result<(), Exit>;
+
 /// Error type for exiting programs.
 pub struct Exit {
     code: crate::Code,
@@ -55,32 +57,23 @@ impl<T, E: std::fmt::Display + 'static> WithCodeResultExt<T> for Result<T, E> {
     }
 }
 
-/// Extension for `main()` functions`.
-pub trait ProcessExitResultExt {
-    /// Report any error message and exit.
-    fn process_exit(self) -> !;
-
-    /// Report, delegating exiting to the caller.
-    fn report(self) -> crate::Code;
+/// Report any error message and exit.
+pub fn exit(result: ExitResult) -> ! {
+    let code = report(result);
+    code.process_exit()
 }
 
-impl ProcessExitResultExt for Result<(), Exit> {
-    fn process_exit(self) -> ! {
-        let code = self.report();
-        code.process_exit()
-    }
-
-    fn report(self) -> crate::Code {
-        match self {
-            Ok(()) => crate::Code::SUCCESS,
-            Err(err) => {
-                if let Some(msg) = err.msg {
-                    // At this point, we might be exiting due to a broken pipe, just do our best and
-                    // move on.
-                    let _ = writeln!(std::io::stderr(), "{}", msg);
-                }
-                err.code
+/// Report, delegating exiting to the caller.
+pub fn report(result: ExitResult) -> crate::Code {
+    match result {
+        Ok(()) => crate::Code::SUCCESS,
+        Err(err) => {
+            if let Some(msg) = err.msg {
+                // At this point, we might be exiting due to a broken pipe, just do our best and
+                // move on.
+                let _ = writeln!(std::io::stderr(), "{}", msg);
             }
+            err.code
         }
     }
 }
