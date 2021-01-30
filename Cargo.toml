@@ -1,6 +1,6 @@
 [package]
 name = "proc-exit"
-version = "1.0.1"
+version = "1.0.2"
 description = "Exit codes for process termination"
 keywords = ["cli", "exit-codes", "sysexit"]
 categories = ["command-line-interface", "os"]
