@@ -10,10 +10,7 @@ pub struct Exit {
 
 impl Exit {
     pub fn new(code: crate::Code) -> Self {
-        Self {
-            code: code,
-            msg: None,
-        }
+        Self { code, msg: None }
     }
 
     pub fn with_message<D: std::fmt::Display + 'static>(mut self, msg: D) -> Self {
