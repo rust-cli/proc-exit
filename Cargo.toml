@@ -14,6 +14,7 @@ license = "MIT"
 [badges]
 azure-devops = { project = "assert-rs", pipeline = "proc-exit" }
 codecov = { repository = "assert-rs/proc-exit" }
+maintenance = { status = "passively-maintained" }
 
 [features]
 default = ["portable"]
