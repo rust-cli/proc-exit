@@ -145,13 +145,10 @@ impl Code {
         Self(code)
     }
 
-    /// Converts [`std::process::ExitStatus`] to [`proc_exit::Code`].
+    /// Converts [`std::process::ExitStatus`] to [`Code`].
     ///
     /// On Unix, if the process was terminated by a fatal signal, the corresponding
     /// signal exit code is returned.
-    ///
-    /// [`std::process::ExitStatus`]: https://doc.rust-lang.org/std/process/struct.ExitStatus.html
-    /// [`proc_exit::Code`]: enum.Code.html
     pub fn from_status(status: std::process::ExitStatus) -> Self {
         Self::from(status)
     }
@@ -223,7 +220,6 @@ impl Code {
     /// assert!(proc_exit::Code::from_status(exit_status).is_ok());
     /// ```
     ///
-    /// [`std::process::ExitStatus`]: https://doc.rust-lang.org/std/process/struct.ExitStatus.html
     pub const fn is_ok(self) -> bool {
         self.0 == Self::SUCCESS.0
     }
@@ -241,7 +237,6 @@ impl Code {
     /// assert!(proc_exit::Code::from_status(exit_status).is_err());
     /// ```
     ///
-    /// [`std::process::ExitStatus`]: https://doc.rust-lang.org/std/process/struct.ExitStatus.html
     pub const fn is_err(self) -> bool {
         !self.is_ok()
     }
