@@ -5,9 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <!-- next-header -->
+
 ## [Unreleased] - ReleaseDate
+
 ## [1.0.1] - 2020-11-23
+
 ## [1.0.0] - 2020-11-23
+
 ## [0.3.0] - 2020-11-23
 
 ### Fixes
