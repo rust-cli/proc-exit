@@ -2,7 +2,6 @@
 
 > Exit codes for process termination
 
-[![Build Status](https://dev.azure.com/assert-rs/assert-rs/_apis/build/status/proc-exit?repoName=assert-rs%2Fproc-exit&branchName=master)](https://dev.azure.com/assert-rs/assert-rs/_build/latest?definitionId=4&repoName=assert-rs%2Fproc-exit&branchName=master)
 [![codecov](https://codecov.io/gh/assert-rs/proc-exit/branch/master/graph/badge.svg)](https://codecov.io/gh/assert-rs/proc-exit)
 [![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
 ![License](https://img.shields.io/crates/l/proc-exit.svg)

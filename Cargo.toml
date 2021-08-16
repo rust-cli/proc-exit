@@ -2,19 +2,29 @@
 name = "proc-exit"
 version = "1.0.2"
 description = "Exit codes for process termination"
-keywords = ["cli", "exit-codes", "sysexit"]
-categories = ["command-line-interface", "os"]
+authors = ["Ed Page <eopage@gmail.com>"]
+license = "MIT OR Apache-2.0"
 repository = "https://github.com/assert-rs/proc-exit"
 documentation = "https://docs.rs/proc-exit"
 readme = "README.md"
-authors = ["Ed Page <eopage@gmail.com>"]
+categories = ["command-line-interface", "os"]
+keywords = ["cli", "exit-codes", "sysexit"]
 edition = "2018"
-license = "MIT"
 
 [badges]
-azure-devops = { project = "assert-rs", pipeline = "proc-exit" }
 codecov = { repository = "assert-rs/proc-exit" }
 maintenance = { status = "passively-maintained" }
+
+[package.metadata.release]
+pre-release-replacements = [
+  {file="src/lib.rs", search="proc-exit = \".*\"", replace="proc-exit = \"{{version}}\"", exactly=1},
+  {file="README.md", search="proc-exit = \".*\"", replace="proc-exit = \"{{version}}\"", exactly=1},
+  {file="CHANGELOG.md", search="Unreleased", replace="{{version}}", min=1},
+  {file="CHANGELOG.md", search="\\.\\.\\.HEAD", replace="...{{tag_name}}", exactly=1},
+  {file="CHANGELOG.md", search="ReleaseDate", replace="{{date}}", min=1},
+  {file="CHANGELOG.md", search="<!-- next-header -->", replace="<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly=1},
+  {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/assert-rs/proc-exit/compare/{{tag_name}}...HEAD", exactly=1},
+]
 
 [features]
 default = ["portable"]
