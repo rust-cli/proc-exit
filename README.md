@@ -2,7 +2,7 @@
 
 > Exit codes for process termination
 
-[![codecov](https://codecov.io/gh/assert-rs/proc-exit/branch/master/graph/badge.svg)](https://codecov.io/gh/assert-rs/proc-exit)
+[![codecov](https://codecov.io/gh/rust-cli/proc-exit/branch/master/graph/badge.svg)](https://codecov.io/gh/rust-cli/proc-exit)
 [![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
 ![License](https://img.shields.io/crates/l/proc-exit.svg)
 [![Crates Status](https://img.shields.io/crates/v/proc-exit.svg)](https://crates.io/crates/proc-exit)

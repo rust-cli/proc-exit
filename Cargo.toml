@@ -4,7 +4,7 @@ version = "1.0.2"
 description = "Exit codes for process termination"
 authors = ["Ed Page <eopage@gmail.com>"]
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/assert-rs/proc-exit"
+repository = "https://github.com/rust-cli/proc-exit"
 documentation = "https://docs.rs/proc-exit"
 readme = "README.md"
 categories = ["command-line-interface", "os"]
@@ -26,7 +26,7 @@ pre-release-replacements = [
   {file="CHANGELOG.md", search="\\.\\.\\.HEAD", replace="...{{tag_name}}", exactly=1},
   {file="CHANGELOG.md", search="ReleaseDate", replace="{{date}}", min=1},
   {file="CHANGELOG.md", search="<!-- next-header -->", replace="<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly=1},
-  {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/assert-rs/proc-exit/compare/{{tag_name}}...HEAD", exactly=1},
+  {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/rust-cli/proc-exit/compare/{{tag_name}}...HEAD", exactly=1},
 ]
 
 [features]

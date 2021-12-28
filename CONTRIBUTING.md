@@ -63,7 +63,7 @@ When we're ready to release, a project owner should do the following
 - `git push upstream master --tag v<X>.<Y>.<Z>`
 - Run `cargo publish` (run `cargo login` first if needed)
 
-[issues]: https://github.com/assert-rs/proc-exit/issues
-[new issue]: https://github.com/assert-rs/proc-exit/issues/new
-[all issues]: https://github.com/assert-rs/proc-exit/issues?utf8=%E2%9C%93&q=is%3Aissue
-[travis]: https://github.com/assert-rs/proc-exit/blob/master/.travis.yml
+[issues]: https://github.com/rust-cli/proc-exit/issues
+[new issue]: https://github.com/rust-cli/proc-exit/issues/new
+[all issues]: https://github.com/rust-cli/proc-exit/issues?utf8=%E2%9C%93&q=is%3Aissue
+[travis]: https://github.com/rust-cli/proc-exit/blob/master/.travis.yml
