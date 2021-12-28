@@ -22,7 +22,7 @@ Add to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-proc-exit = "1.0.2"
+proc-exit = "1.0.3"
 ```
 
 Feature flags:

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+## [1.0.3] - 2021-12-28
+
 ### Fixes
 
 - Moved github orgs
@@ -31,7 +33,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - `Exit`s members should not be public
 
 <!-- next-url -->
-[Unreleased]: https://github.com/rust-cli/proc-exit/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/rust-cli/proc-exit/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/rust-cli/proc-exit/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/rust-cli/proc-exit/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/rust-cli/proc-exit/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/rust-cli/proc-exit/compare/v0.3.0...v1.0.0

@@ -1,6 +1,6 @@
 [package]
 name = "proc-exit"
-version = "1.0.2"
+version = "1.0.3"
 description = "Exit codes for process termination"
 authors = ["Ed Page <eopage@gmail.com>"]
 license = "MIT OR Apache-2.0"
