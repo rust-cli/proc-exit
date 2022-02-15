@@ -21,11 +21,11 @@ impl Code {
     pub const DATA_ERR: Code = Code(65);
 
     /// An input file (not a system file) did not exist or was not readable.
-    /// This could also include erros like “No message” to a mailer (if it
+    /// This could also include errors like “No message” to a mailer (if it
     /// cared to catch it).
     pub const NO_INPUT: Code = Code(66);
 
-    /// The user specified did not exist.  This might be used for mail adresses
+    /// The user specified did not exist.  This might be used for mail addresses
     /// or remote logins.
     pub const NO_USER: Code = Code(67);
 
