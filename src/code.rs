@@ -241,25 +241,6 @@ impl Code {
         !self.is_ok()
     }
 
-    /// Tests if the provided exit code is reserved, and has a special meaning in
-    /// shells.
-    #[allow(clippy::needless_bool)]
-    #[allow(clippy::if_same_then_else)]
-    pub const fn is_reserved(self) -> bool {
-        let code = self.0;
-        if Self::SUCCESS.0 <= code && code <= Self::UNKNOWN.0 {
-            true
-        } else if Self::USAGE_ERR.0 <= code && code <= Self::CONFIG_ERR.0 {
-            true
-        } else if Self::NOT_EXECUTABLE.0 <= code && code <= Self::INVALID_EXIT.0 {
-            true
-        } else if Self::SIGHUP.0 <= code && code <= Self::SIGTERM.0 {
-            true
-        } else {
-            false
-        }
-    }
-
     pub const fn raw(self) -> i32 {
         self.0
     }
