@@ -60,20 +60,14 @@
 //!   - Includes signals
 //!   - Integrates with `std::process` and `std::io::Error`
 //!   - Doesn't integrate with `main`
-//! - [exit-code][exit-code]
-//!   - `i32` constants and helper methods
-//!   - Doesn't include signals
-//!   - Doesn't integrate with `main`, `std::process`, or `std::io::Error`
-//! - [exitcode][exitcode]
-//!   - `i32` constants and helper methods
-//!   - Doesn't include signals
-//!   - Doesn't integrate with `main`, `std::process`, or `std::io::Error`
+//! - [sysexits][sysexits]
+//!   - Only includes exit codes
+//!   - Uses an exit code tagged enum which can be converted to [`std::process:ExitCode`]
 //! - [exitfailure][exitfailure]
 //!   - Allows `Display`able errors to be used with [`?` in `main()`](https://github.com/rust-lang/rust/issues/43301)
 //!
 //! [sysexit]: https://crates.io/crates/sysexit
-//! [exit-code]: https://crates.io/crates/exit-code
-//! [exitcode]: https://crates.io/crates/exitcode
+//! [sysexits]: https://crates.io/crates/sysexits
 //! [exitfailure]: https://crates.io/crates/exitfailure
 
 mod code;
