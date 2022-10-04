@@ -10,8 +10,11 @@ pub fn io_to_signal(kind: std::io::ErrorKind) -> Option<crate::Code> {
     }
 }
 
-/// Catch-all exit code when the process exits for an unknown reason.
-pub const UNKNOWN: crate::Code = crate::Code::new(2);
+/// Command line usage error
+///
+/// While bash generally documents this as "Misuse of shell builtins (according to Bash
+/// documentation)", it is more broadly interpreted as a general usage error.
+pub const USAGE: crate::Code = crate::Code::new(2);
 
 /// Command was found but is not executable by the shell.
 pub const NOT_EXECUTABLE: crate::Code = crate::Code::new(126);
