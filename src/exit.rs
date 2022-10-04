@@ -54,6 +54,24 @@ impl<T, E: std::fmt::Display + 'static> WithCodeResultExt<T> for Result<T, E> {
     }
 }
 
+/// Extension for converting errors to `Exit`.
+pub trait ToSysexitsResultExt<T> {
+    /// Convert an Error into an `Exit`
+    fn to_sysexits(self) -> Result<T, Exit>;
+}
+
+impl<T> ToSysexitsResultExt<T> for Result<T, std::io::Error> {
+    fn to_sysexits(self) -> Result<T, Exit> {
+        self.map_err(|e| {
+            let kind = e.kind();
+            let code = crate::io_to_sysexists(kind)
+                .or_else(|| crate::io_to_signal(kind))
+                .unwrap_or(crate::Code::IO_ERR);
+            Exit::new(code).with_message(e)
+        })
+    }
+}
+
 /// Report any error message and exit.
 pub fn exit(result: ExitResult) -> ! {
     let code = report(result);

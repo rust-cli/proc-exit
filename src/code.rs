@@ -318,6 +318,33 @@ impl From<std::io::ErrorKind> for Code {
     }
 }
 
+/// Convert [`std::io::ErrorKind`] to a [`Code`]
+pub fn io_to_sysexists(kind: std::io::ErrorKind) -> Option<Code> {
+    use std::io::ErrorKind::*;
+    match kind {
+        NotFound => Some(Code::OS_FILE_ERR),
+        PermissionDenied => Some(Code::NO_PERM),
+        ConnectionRefused | ConnectionReset | ConnectionAborted | NotConnected => {
+            Some(Code::PROTOCOL_ERR)
+        }
+        AddrInUse | AddrNotAvailable => Some(Code::SERVICE_UNAVAILABLE),
+        AlreadyExists => Some(Code::CANT_CREAT),
+        InvalidInput | InvalidData | UnexpectedEof => Some(Code::DATA_ERR),
+        WriteZero => Some(Code::NO_INPUT),
+        _ => None,
+    }
+}
+
+pub fn io_to_signal(kind: std::io::ErrorKind) -> Option<Code> {
+    use std::io::ErrorKind::*;
+    match kind {
+        BrokenPipe => Some(Code::SIGPIPE),
+        TimedOut => Some(Code::SIGALRM),
+        Interrupted => Some(Code::SIGINT),
+        _ => None,
+    }
+}
+
 #[cfg(target_family = "unix")]
 fn platform_exit_code(status: std::process::ExitStatus) -> Option<i32> {
     use std::os::unix::process::ExitStatusExt;

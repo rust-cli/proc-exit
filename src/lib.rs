@@ -93,7 +93,10 @@
 mod code;
 mod exit;
 
+pub use code::io_to_signal;
+pub use code::io_to_sysexists;
 pub use code::Code;
+pub use exit::ToSysexitsResultExt;
 pub use exit::WithCodeResultExt;
 pub use exit::{exit, report};
 pub use exit::{Exit, ExitResult};
