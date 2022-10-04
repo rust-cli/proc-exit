@@ -39,7 +39,7 @@
 //! }
 //! ```
 //!
-//! ## Relevant crates
+//! ## Relevant CLI crates
 //!
 //! Other crates that might be useful in testing command line programs.
 //! - [duct][duct] for orchestrating multiple processes.
@@ -52,14 +52,18 @@
 //! [assert_cmd]: https://crates.io/crates/assert_cmd
 //! [commandspec]: https://crates.io/crates/commandspec
 //!
-//! ## Related crates
+//! ## Alternative crates
 //!
-//! Some crates that fill a similar role include:
+//! Crates considered when making this one include:
 //! - [sysexit][sysexit]
 //!   - Uses an enum, making certain states unrepresentable
 //!   - Includes signals
 //!   - Integrates with `std::process` and `std::io::Error`
 //!   - Doesn't integrate with `main`
+//! - [sysexits][sysexits]
+//!   - Uses an enum, making certain states unrepresentable
+//!   - Doesn't include signals
+//!   - Doesn't integrate with `main`, `std::process`, or `std::io::Error`
 //! - [exit-code][exit-code]
 //!   - `i32` constants and helper methods
 //!   - Doesn't include signals
