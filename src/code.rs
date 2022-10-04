@@ -151,3 +151,11 @@ fn platform_exit_code(status: std::process::ExitStatus) -> Option<i32> {
 fn platform_exit_code(status: std::process::ExitStatus) -> Option<i32> {
     status.code()
 }
+
+impl std::process::Termination for Code {
+    #[inline]
+    fn report(self) -> std::process::ExitCode {
+        self.as_exit_code()
+            .unwrap_or(std::process::ExitCode::FAILURE)
+    }
+}

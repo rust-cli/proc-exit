@@ -29,6 +29,15 @@ impl std::fmt::Display for Exit {
     }
 }
 
+impl std::process::Termination for Exit {
+    #[inline]
+    fn report(self) -> std::process::ExitCode {
+        self.code
+            .as_exit_code()
+            .unwrap_or(std::process::ExitCode::FAILURE)
+    }
+}
+
 impl std::fmt::Debug for Exit {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         // For compatibility with `std::process::Termination`
