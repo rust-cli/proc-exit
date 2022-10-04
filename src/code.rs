@@ -93,6 +93,10 @@ impl Code {
         !self.is_ok()
     }
 
+    pub fn as_exit_code(self) -> Option<std::process::ExitCode> {
+        self.as_portable().map(|c| c.into())
+    }
+
     pub const fn as_raw(self) -> i32 {
         self.0
     }
