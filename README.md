@@ -25,9 +25,6 @@ Add to your `Cargo.toml`:
 proc-exit = "1.0.3"
 ```
 
-Feature flags:
-- `portable`:  Coerce exit codes to `u8` for consistent, cross-platform, behavior
-
 ## Relevant crates
 
 Other crates that might be useful in testing command line programs.

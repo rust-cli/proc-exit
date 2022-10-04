@@ -28,8 +28,3 @@ pre-release-replacements = [
   {file="CHANGELOG.md", search="<!-- next-header -->", replace="<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly=1},
   {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/rust-cli/proc-exit/compare/{{tag_name}}...HEAD", exactly=1},
 ]
-
-[features]
-default = ["portable"]
-# Coerce exit codes to `u8` for consistent, cross-platform, behavior
-portable = []
