@@ -96,14 +96,14 @@ mod code;
 mod exit;
 
 pub mod prelude {
-    pub use super::ToSysexitsResultExt as _;
     pub use super::WithCodeResultExt as _;
+    pub use crate::sysexits::ToSysexitsResultExt as _;
 }
 
+pub mod sysexits;
+
 pub use code::io_to_signal;
-pub use code::io_to_sysexists;
 pub use code::Code;
-pub use exit::ToSysexitsResultExt;
 pub use exit::WithCodeResultExt;
 pub use exit::{exit, report};
 pub use exit::{Exit, ExitResult};
