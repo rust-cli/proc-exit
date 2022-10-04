@@ -7,6 +7,7 @@
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Code(i32);
 
+/// # Create a [`Code`]
 impl Code {
     /// The process exited successfully.
     pub const SUCCESS: Code = Code(0);
@@ -26,15 +27,10 @@ impl Code {
     pub fn from_status(status: std::process::ExitStatus) -> Self {
         Self::from(status)
     }
+}
 
-    /// Test if provided exit code is portable across platforms.
-    ///
-    /// While Windows has wider types for return codes, Unix OS's tend to only support 8-bits,
-    /// stripping off the higher order bits.
-    pub const fn is_portable(self) -> bool {
-        0 <= self.as_raw() && self.as_raw() <= 255
-    }
-
+/// # Bubble up the exit [`Code`]
+impl Code {
     /// [`exit`][std::process::exit] now!
     pub fn process_exit(self) -> ! {
         std::process::exit(self.as_raw())
@@ -49,9 +45,36 @@ impl Code {
         }
     }
 
+    /// Convert to [`Exit`][crate::Exit] error type
+    pub fn as_exit(self) -> crate::Exit {
+        crate::Exit::new(self)
+    }
+
     /// Add user-visible message (like an [`Error`][std::error::Error])
     pub fn with_message<D: std::fmt::Display + 'static>(self, msg: D) -> crate::Exit {
         self.as_exit().with_message(msg)
+    }
+}
+
+/// # Introspection and Integration
+impl Code {
+    /// Convert to [`ExitCode][std::process::ExitCode]
+    pub fn as_exit_code(self) -> Option<std::process::ExitCode> {
+        self.as_portable().map(|c| c.into())
+    }
+
+    /// Convert to raw value
+    pub const fn as_raw(self) -> i32 {
+        self.0
+    }
+
+    /// Convert to portable, raw value
+    pub const fn as_portable(self) -> Option<u8> {
+        if self.is_portable() {
+            Some(self.as_raw() as u8)
+        } else {
+            None
+        }
     }
 
     /// Determines if the provided [`std::process::ExitStatus`] was successful.
@@ -88,24 +111,12 @@ impl Code {
         !self.is_ok()
     }
 
-    pub fn as_exit(self) -> crate::Exit {
-        crate::Exit::new(self)
-    }
-
-    pub fn as_exit_code(self) -> Option<std::process::ExitCode> {
-        self.as_portable().map(|c| c.into())
-    }
-
-    pub const fn as_raw(self) -> i32 {
-        self.0
-    }
-
-    pub const fn as_portable(self) -> Option<u8> {
-        if self.is_portable() {
-            Some(self.as_raw() as u8)
-        } else {
-            None
-        }
+    /// Test if provided exit code is portable across platforms.
+    ///
+    /// While Windows has wider types for return codes, Unix OS's tend to only support 8-bits,
+    /// stripping off the higher order bits.
+    pub const fn is_portable(self) -> bool {
+        0 <= self.as_raw() && self.as_raw() <= 255
     }
 }
 
