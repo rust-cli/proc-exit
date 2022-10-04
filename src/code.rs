@@ -59,7 +59,6 @@ impl Code {
     }
 
     pub fn into_exit(self) -> crate::Exit {
-        assert_ne!(self, Self::SUCCESS);
         crate::Exit::new(self)
     }
 
