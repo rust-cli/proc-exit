@@ -27,15 +27,6 @@ impl Code {
         Self::from(status)
     }
 
-    /// Coerce the code to a portable value
-    pub const fn coerce(self) -> Option<Self> {
-        if let Some(code) = self.as_portable() {
-            Some(Self::new(code as i32))
-        } else {
-            None
-        }
-    }
-
     /// Test if provided exit code is portable across platforms.
     ///
     /// While Windows has wider types for return codes, Unix OS's tend to only support 8-bits,
@@ -46,7 +37,7 @@ impl Code {
 
     /// [`exit`][std::process::exit] now!
     pub fn process_exit(self) -> ! {
-        std::process::exit(self.coerce().unwrap_or_default().as_raw())
+        std::process::exit(self.as_raw())
     }
 
     /// Convert to [`Result`][std::result::Result]
