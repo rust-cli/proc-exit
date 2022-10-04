@@ -22,6 +22,8 @@
 //! # Example
 //!
 //! ```
+//! use proc_exit::prelude::*;
+//!
 //! fn main() {
 //!     // Simple but Macro-less `main`
 //!     // - Fast compiles
@@ -33,7 +35,7 @@
 //! fn run() -> proc_exit::ExitResult {
 //!     // Integrates directly with `std::io::Error`, returning the right exit code.
 //!     let exit_status = std::process::Command::new("true")
-//!          .status()?;
+//!          .status().to_sysexits()?;
 //!     // Can pass `Command` exit codes right up, when appropriate
 //!     proc_exit::Code::from_status(exit_status).ok()?;
 //!
@@ -92,6 +94,11 @@
 
 mod code;
 mod exit;
+
+pub mod prelude {
+    pub use super::ToSysexitsResultExt as _;
+    pub use super::WithCodeResultExt as _;
+}
 
 pub use code::io_to_signal;
 pub use code::io_to_sysexists;
