@@ -100,9 +100,9 @@ pub mod prelude {
     pub use crate::sysexits::ToSysexitsResultExt as _;
 }
 
+pub mod bash;
 pub mod sysexits;
 
-pub use code::io_to_signal;
 pub use code::Code;
 pub use exit::WithCodeResultExt;
 pub use exit::{exit, report};

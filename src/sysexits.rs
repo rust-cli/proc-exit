@@ -13,7 +13,7 @@ impl<T> ToSysexitsResultExt<T> for Result<T, std::io::Error> {
         self.map_err(|e| {
             let kind = e.kind();
             let code = io_to_sysexists(kind)
-                .or_else(|| crate::io_to_signal(kind))
+                .or_else(|| crate::bash::io_to_signal(kind))
                 .unwrap_or(IO_ERR);
             crate::Exit::new(code).with_message(e)
         })
