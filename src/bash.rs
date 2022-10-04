@@ -24,6 +24,11 @@ pub const NOT_FOUND: crate::Code = crate::Code::new(127);
 /// the command is found but that a library it requires is not found.
 pub const INVALID_EXIT: crate::Code = crate::Code::new(128);
 
+/// Exit status out of range
+///
+/// `exit` takes only integer args in the range 0 - 255
+pub const STATUS_OUT_OF_RANGE: crate::Code = crate::Code::new(255);
+
 const SIGBASE: i32 = 128;
 
 /// The `SIGHUP` signal is sent to a process when its controlling terminal
