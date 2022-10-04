@@ -1,5 +1,6 @@
 use std::io::Write;
 
+/// For use in `fn run() -> ExitResult {}`
 pub type ExitResult = Result<(), Exit>;
 
 /// Error type for exiting programs.
@@ -29,16 +30,19 @@ impl std::fmt::Display for Exit {
     }
 }
 
+impl std::process::Termination for Exit {
+    #[inline]
+    fn report(self) -> std::process::ExitCode {
+        self.code
+            .as_exit_code()
+            .unwrap_or(std::process::ExitCode::FAILURE)
+    }
+}
+
 impl std::fmt::Debug for Exit {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         // For compatibility with `std::process::Termination`
         std::fmt::Display::fmt(self, f)
-    }
-}
-
-impl From<std::io::Error> for Exit {
-    fn from(err: std::io::Error) -> Self {
-        Self::new(err.kind().into()).with_message(err)
     }
 }
 
