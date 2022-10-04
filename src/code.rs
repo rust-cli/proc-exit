@@ -58,13 +58,9 @@ impl Code {
         }
     }
 
-    pub fn into_exit(self) -> crate::Exit {
-        crate::Exit::new(self)
-    }
-
     /// Add user-visible message (like an [`Error`][std::error::Error])
     pub fn with_message<D: std::fmt::Display + 'static>(self, msg: D) -> crate::Exit {
-        self.into_exit().with_message(msg)
+        self.as_exit().with_message(msg)
     }
 
     /// Determines if the provided [`std::process::ExitStatus`] was successful.
@@ -99,6 +95,10 @@ impl Code {
     ///
     pub const fn is_err(self) -> bool {
         !self.is_ok()
+    }
+
+    pub fn as_exit(self) -> crate::Exit {
+        crate::Exit::new(self)
     }
 
     pub fn as_exit_code(self) -> Option<std::process::ExitCode> {
