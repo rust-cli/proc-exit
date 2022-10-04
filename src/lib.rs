@@ -65,6 +65,8 @@
 //!   - Uses an exit code tagged enum which can be converted to [`std::process:ExitCode`]
 //! - [exitfailure][exitfailure]
 //!   - Allows `Display`able errors to be used with [`?` in `main()`](https://github.com/rust-lang/rust/issues/43301)
+//! - exitcode
+//!   - Similar to sysexits, but no longer maintained and incompatible with modern Rust features like [`std::process::Termination`]
 //!
 //! [sysexit]: https://crates.io/crates/sysexit
 //! [sysexits]: https://crates.io/crates/sysexits
