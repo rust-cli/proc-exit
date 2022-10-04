@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- next-header -->
 ## [Unreleased] - ReleaseDate
 
+### Breaking Changes
+
+- sysexits codes moved from `Code::*` to `sysexits::*`
+- bash codes moved from `Code::*` to `bash::*`
+- `ErrorKind` conversion requires `ToSysexitsResultExt::to_sysexits`
+- Removed `Display` for `Code`
+- Removed `is_reserved`
+- Changed default code to `FAILURE`
+- Renamed `Code::raw` to `Code::as_raw`
+- Removed `portable` feature forcing portable values when calling `std::process::exit`
+
+### Compatibility
+
+MSRV is now 1.61.0 to integrate with `Termination`
+
+### Features
+
+- Conversion from `Code` to `std::process::ExitCode`
+- `Termination` support
+
 ## [1.0.3] - 2021-12-28
 
 ### Fixes
