@@ -20,9 +20,8 @@
 
 Add to your `Cargo.toml`:
 
-```toml
-[dependencies]
-proc-exit = "1.0.3"
+```console
+$ cargo add proc-exit
 ```
 
 ## Relevant crates
