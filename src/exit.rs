@@ -36,12 +36,6 @@ impl std::fmt::Debug for Exit {
     }
 }
 
-impl From<std::io::Error> for Exit {
-    fn from(err: std::io::Error) -> Self {
-        Self::new(err.kind().into()).with_message(err)
-    }
-}
-
 /// Extension for converting errors to `Exit`.
 pub trait WithCodeResultExt<T> {
     /// Convert an Error into an `Exit`

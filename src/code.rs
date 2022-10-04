@@ -296,28 +296,6 @@ impl From<std::process::ExitStatus> for Code {
     }
 }
 
-impl From<std::io::ErrorKind> for Code {
-    fn from(kind: std::io::ErrorKind) -> Self {
-        use std::io::ErrorKind::*;
-        match kind {
-            NotFound => Code::OS_FILE_ERR,
-            PermissionDenied => Code::NO_PERM,
-            ConnectionRefused | ConnectionReset | ConnectionAborted | NotConnected => {
-                Code::PROTOCOL_ERR
-            }
-            AddrInUse | AddrNotAvailable => Code::SERVICE_UNAVAILABLE,
-            BrokenPipe => Code::SIGPIPE,
-            AlreadyExists => Code::CANT_CREAT,
-            InvalidInput | InvalidData | UnexpectedEof => Code::DATA_ERR,
-            TimedOut => Code::SIGALRM,
-            WriteZero => Code::NO_INPUT,
-            Interrupted => Code::SIGINT,
-            Other => Code::FAILURE,
-            _ => Code::IO_ERR,
-        }
-    }
-}
-
 /// Convert [`std::io::ErrorKind`] to a [`Code`]
 pub fn io_to_sysexists(kind: std::io::ErrorKind) -> Option<Code> {
     use std::io::ErrorKind::*;
