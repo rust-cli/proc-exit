@@ -1,4 +1,9 @@
 /// Process exit code.
+///
+/// Common exit codes:
+/// - [`Code::SUCCESS`]
+/// - [`Code::FAILURE`]
+/// - [`bash::USAGE`][crate::bash::USAGE]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub struct Code(i32);
 
@@ -9,6 +14,7 @@ impl Code {
     /// Generic failure.
     pub const FAILURE: Code = Code(1);
 
+    /// Create a custom error code
     pub const fn new(code: i32) -> Self {
         Self(code)
     }
@@ -38,10 +44,12 @@ impl Code {
         0 <= self.as_raw() && self.as_raw() <= 255
     }
 
+    /// [`exit`][std::process::exit] now!
     pub fn process_exit(self) -> ! {
         std::process::exit(self.coerce().unwrap_or_default().as_raw())
     }
 
+    /// Convert to [`Result`][std::result::Result]
     pub fn ok(self) -> crate::ExitResult {
         if self.as_raw() == Self::SUCCESS.as_raw() {
             Ok(())
@@ -55,6 +63,7 @@ impl Code {
         crate::Exit::new(self)
     }
 
+    /// Add user-visible message (like an [`Error`][std::error::Error])
     pub fn with_message<D: std::fmt::Display + 'static>(self, msg: D) -> crate::Exit {
         self.into_exit().with_message(msg)
     }

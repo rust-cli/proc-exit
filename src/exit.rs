@@ -1,5 +1,6 @@
 use std::io::Write;
 
+/// For use in `fn run() -> ExitResult {}`
 pub type ExitResult = Result<(), Exit>;
 
 /// Error type for exiting programs.

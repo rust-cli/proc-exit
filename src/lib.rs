@@ -3,7 +3,7 @@
 //! - `i32` newtype for exit codes
 //!   - Can represent any valid exit code
 //!   - Type safe, operations are restricted to what is valid for exit codes
-//! - Includes standard exit codes and signal exit codes
+//! - Includes common exit codes and signal exit codes
 //! - Integrate with `main`, `std::process`, and `std::io::Error`
 //! - Supports exiting silently (error message reported through another means)
 //!
@@ -11,9 +11,8 @@
 //!
 //! Add to your `Cargo.toml`:
 //!
-//! ```toml
-//! [dependencies]
-//! proc-exit = "1.0.3"
+//! ```console
+//! $ cargo add proc-exit
 //! ```
 //!
 //! # Example
@@ -32,7 +31,7 @@
 //! fn run() -> proc_exit::ExitResult {
 //!     // Integrates directly with `std::io::Error`, returning the right exit code.
 //!     let exit_status = std::process::Command::new("true")
-//!          .status().to_sysexits()?;
+//!          .status().with_code(proc_exit::Code::FAILURE)?;
 //!     // Can pass `Command` exit codes right up, when appropriate
 //!     proc_exit::Code::from_status(exit_status).ok()?;
 //!
@@ -57,7 +56,7 @@
 //!
 //! Some crates that fill a similar role include:
 //! - [sysexit][sysexit]
-//!   - Uses an enum, making certain states unpresentable
+//!   - Uses an enum, making certain states unrepresentable
 //!   - Includes signals
 //!   - Integrates with `std::process` and `std::io::Error`
 //!   - Doesn't integrate with `main`
@@ -76,22 +75,11 @@
 //! [exit-code]: https://crates.io/crates/exit-code
 //! [exitcode]: https://crates.io/crates/exitcode
 //! [exitfailure]: https://crates.io/crates/exitfailure
-//!
-//! ## References
-//!
-//! As a basis it encodes the exit codes of [sysexits(3)][sysexits] from OpenBSD (64-78), exit statuses used by [bash][appendix-e],
-//! supplemented by codes created by shells when the command is terminated
-//! by a fatal signal.  When the fatal signal is a number _N_, the latter
-//! follows bash's strategy of using the value 128 + _N_ as the exit status.
-//! This means that the `SIGHUP` (1) signal will be recognised as the exit code
-//! for the number 129.  Signal codes were taken from [wikipedia](https://en.wikipedia.org/wiki/Signal_(IPC)#SIGALRM)
-//!
-//! [sysexits]: http://tldp.org/LDP/abs/html/exitcodes.html
-//! [appendix-e]: http://tldp.org/LDP/abs/html/exitcodes.html
 
 mod code;
 mod exit;
 
+/// Easy access to traits
 pub mod prelude {
     pub use super::WithCodeResultExt as _;
     pub use crate::sysexits::ToSysexitsResultExt as _;

@@ -2,9 +2,33 @@
 //!
 //! Note: [FreeBSD no longer encourages these](https://reviews.freebsd.org/D27176)
 
-/// Extension for converting errors to `Exit`.
+/// Extension for converting errors to [`Exit`][crate::Exit]
+///
+/// # Example
+///
+/// ```
+/// use proc_exit::prelude::*;
+///
+/// fn main() {
+///     // Simple but Macro-less `main`
+///     // - Fast compiles
+///     // - Composable with other features
+///     let result = run();
+///     proc_exit::exit(result);
+/// }
+///
+/// fn run() -> proc_exit::ExitResult {
+///     // Integrates directly with `std::io::Error`, returning the right exit code.
+///     let exit_status = std::process::Command::new("true")
+///          .status().to_sysexits()?;
+///     // Can pass `Command` exit codes right up, when appropriate
+///     proc_exit::Code::from_status(exit_status).ok()?;
+///
+///     proc_exit::Code::SUCCESS.ok()
+/// }
+/// ```
 pub trait ToSysexitsResultExt<T> {
-    /// Convert an Error into an `Exit`
+    /// Convert an Error into an [`Exit`][crate::Exit]
     fn to_sysexits(self) -> Result<T, crate::Exit>;
 }
 
@@ -20,7 +44,7 @@ impl<T> ToSysexitsResultExt<T> for Result<T, std::io::Error> {
     }
 }
 
-/// Convert [`std::io::ErrorKind`] to a [`Code`]
+/// Convert [`std::io::ErrorKind`] to a [`Code`][crate::Code]
 pub fn io_to_sysexists(kind: std::io::ErrorKind) -> Option<crate::Code> {
     use std::io::ErrorKind::*;
     match kind {
