@@ -23,8 +23,8 @@ impl Code {
 
     /// Coerce the code to a portable value
     pub const fn coerce(self) -> Option<Self> {
-        if self.is_portable() {
-            Some(self)
+        if let Some(code) = self.as_portable() {
+            Some(Self::new(code as i32))
         } else {
             None
         }
@@ -95,6 +95,14 @@ impl Code {
 
     pub const fn as_raw(self) -> i32 {
         self.0
+    }
+
+    pub const fn as_portable(self) -> Option<u8> {
+        if self.is_portable() {
+            Some(self.as_raw() as u8)
+        } else {
+            None
+        }
     }
 }
 
