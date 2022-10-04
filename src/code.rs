@@ -184,7 +184,7 @@ impl Code {
 impl Default for Code {
     fn default() -> Self {
         // Chosen to allow `coerce().unwrap_or_default`
-        Self::UNKNOWN
+        Self::FAILURE
     }
 }
 
@@ -207,7 +207,7 @@ impl From<i32> for Code {
 /// https://doc.rust-lang.org/std/process/struct.ExitStatus.html#method.code
 impl From<std::process::ExitStatus> for Code {
     fn from(status: std::process::ExitStatus) -> Self {
-        let n = platform_exit_code(status).unwrap_or(Code::UNKNOWN.0);
+        let n = platform_exit_code(status).unwrap_or(Code::default().0);
         From::from(n)
     }
 }
