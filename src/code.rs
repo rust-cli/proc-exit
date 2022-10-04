@@ -35,15 +35,15 @@ impl Code {
     /// While Windows has wider types for return codes, Unix OS's tend to only support 8-bits,
     /// stripping off the higher order bits.
     pub const fn is_portable(self) -> bool {
-        0 <= self.0 && self.0 <= 255
+        0 <= self.as_raw() && self.as_raw() <= 255
     }
 
     pub fn process_exit(self) -> ! {
-        std::process::exit(self.coerce().unwrap_or_default().raw())
+        std::process::exit(self.coerce().unwrap_or_default().as_raw())
     }
 
     pub fn ok(self) -> crate::ExitResult {
-        if self.0 == Self::SUCCESS.0 {
+        if self.as_raw() == Self::SUCCESS.as_raw() {
             Ok(())
         } else {
             Err(crate::Exit::new(self))
@@ -73,7 +73,7 @@ impl Code {
     /// ```
     ///
     pub const fn is_ok(self) -> bool {
-        self.0 == Self::SUCCESS.0
+        self.as_raw() == Self::SUCCESS.as_raw()
     }
 
     /// Determines if the provided [`std::process::ExitStatus`] was unsuccessful.
@@ -93,7 +93,7 @@ impl Code {
         !self.is_ok()
     }
 
-    pub const fn raw(self) -> i32 {
+    pub const fn as_raw(self) -> i32 {
         self.0
     }
 }
