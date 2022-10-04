@@ -21,8 +21,6 @@ include = [
 
 [package.metadata.release]
 pre-release-replacements = [
-  {file="src/lib.rs", search="proc-exit = \".*\"", replace="proc-exit = \"{{version}}\"", exactly=1},
-  {file="README.md", search="proc-exit = \".*\"", replace="proc-exit = \"{{version}}\"", exactly=1},
   {file="CHANGELOG.md", search="Unreleased", replace="{{version}}", min=1},
   {file="CHANGELOG.md", search="\\.\\.\\.HEAD", replace="...{{tag_name}}", exactly=1},
   {file="CHANGELOG.md", search="ReleaseDate", replace="{{date}}", min=1},
