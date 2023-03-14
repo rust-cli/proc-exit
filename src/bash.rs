@@ -1,6 +1,7 @@
 //! Bash [exit codes](https://tldp.org/LDP/abs/html/exitcodes.html)
 
 /// Convert [`std::io::ErrorKind`] to a [`Code`][crate::Code]
+#[inline]
 pub fn io_to_signal(kind: std::io::ErrorKind) -> Option<crate::Code> {
     use std::io::ErrorKind::*;
     match kind {

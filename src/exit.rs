@@ -10,10 +10,12 @@ pub struct Exit {
 }
 
 impl Exit {
+    #[inline]
     pub fn new(code: crate::Code) -> Self {
         Self { code, msg: None }
     }
 
+    #[inline]
     pub fn with_message<D: std::fmt::Display + 'static>(mut self, msg: D) -> Self {
         self.msg = Some(Box::new(msg));
         self
@@ -21,6 +23,7 @@ impl Exit {
 }
 
 impl std::fmt::Display for Exit {
+    #[inline]
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         if let Some(msg) = self.msg.as_ref() {
             msg.fmt(f)
@@ -40,6 +43,7 @@ impl std::process::Termination for Exit {
 }
 
 impl std::fmt::Debug for Exit {
+    #[inline]
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         // For compatibility with `std::process::Termination`
         std::fmt::Display::fmt(self, f)
@@ -53,18 +57,21 @@ pub trait WithCodeResultExt<T> {
 }
 
 impl<T, E: std::fmt::Display + 'static> WithCodeResultExt<T> for Result<T, E> {
+    #[inline]
     fn with_code(self, code: crate::Code) -> Result<T, Exit> {
         self.map_err(|e| Exit::new(code).with_message(e))
     }
 }
 
 /// Report any error message and exit.
+#[inline]
 pub fn exit(result: ExitResult) -> ! {
     let code = report(result);
     code.process_exit()
 }
 
 /// Report, delegating exiting to the caller.
+#[inline]
 pub fn report(result: ExitResult) -> crate::Code {
     match result {
         Ok(()) => crate::Code::SUCCESS,

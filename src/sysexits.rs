@@ -33,6 +33,7 @@ pub trait ToSysexitsResultExt<T> {
 }
 
 impl<T> ToSysexitsResultExt<T> for Result<T, std::io::Error> {
+    #[inline]
     fn to_sysexits(self) -> Result<T, crate::Exit> {
         self.map_err(|e| {
             let kind = e.kind();
@@ -45,6 +46,7 @@ impl<T> ToSysexitsResultExt<T> for Result<T, std::io::Error> {
 }
 
 /// Convert [`std::io::ErrorKind`] to a [`Code`][crate::Code]
+#[inline]
 pub fn io_to_sysexists(kind: std::io::ErrorKind) -> Option<crate::Code> {
     use std::io::ErrorKind::*;
     match kind {
