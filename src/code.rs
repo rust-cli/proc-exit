@@ -24,6 +24,7 @@ impl Code {
     ///
     /// On Unix, if the process was terminated by a fatal signal, the corresponding
     /// signal exit code is returned.
+    #[inline]
     pub fn from_status(status: std::process::ExitStatus) -> Self {
         Self::from(status)
     }
@@ -32,11 +33,13 @@ impl Code {
 /// # Bubble up the exit [`Code`]
 impl Code {
     /// [`exit`][std::process::exit] now!
+    #[inline]
     pub fn process_exit(self) -> ! {
         std::process::exit(self.as_raw())
     }
 
     /// Convert to [`Result`][std::result::Result]
+    #[inline]
     pub fn ok(self) -> crate::ExitResult {
         if self.as_raw() == Self::SUCCESS.as_raw() {
             Ok(())
@@ -46,11 +49,13 @@ impl Code {
     }
 
     /// Convert to [`Exit`][crate::Exit] error type
+    #[inline]
     pub fn as_exit(self) -> crate::Exit {
         crate::Exit::new(self)
     }
 
     /// Add user-visible message (like an [`Error`][std::error::Error])
+    #[inline]
     pub fn with_message<D: std::fmt::Display + 'static>(self, msg: D) -> crate::Exit {
         self.as_exit().with_message(msg)
     }
@@ -59,16 +64,19 @@ impl Code {
 /// # Introspection and Integration
 impl Code {
     /// Convert to [`ExitCode][std::process::ExitCode]
+    #[inline]
     pub fn as_exit_code(self) -> Option<std::process::ExitCode> {
         self.as_portable().map(|c| c.into())
     }
 
     /// Convert to raw value
+    #[inline]
     pub const fn as_raw(self) -> i32 {
         self.0
     }
 
     /// Convert to portable, raw value
+    #[inline]
     pub const fn as_portable(self) -> Option<u8> {
         if self.is_portable() {
             Some(self.as_raw() as u8)
@@ -90,6 +98,7 @@ impl Code {
     /// assert!(proc_exit::Code::from_status(exit_status).is_ok());
     /// ```
     ///
+    #[inline]
     pub const fn is_ok(self) -> bool {
         self.as_raw() == Self::SUCCESS.as_raw()
     }
@@ -107,6 +116,7 @@ impl Code {
     /// assert!(proc_exit::Code::from_status(exit_status).is_err());
     /// ```
     ///
+    #[inline]
     pub const fn is_err(self) -> bool {
         !self.is_ok()
     }
@@ -115,12 +125,14 @@ impl Code {
     ///
     /// While Windows has wider types for return codes, Unix OS's tend to only support 8-bits,
     /// stripping off the higher order bits.
+    #[inline]
     pub const fn is_portable(self) -> bool {
         0 <= self.as_raw() && self.as_raw() <= 255
     }
 }
 
 impl Default for Code {
+    #[inline]
     fn default() -> Self {
         // Chosen to allow `coerce().unwrap_or_default`
         Self::FAILURE
@@ -129,6 +141,7 @@ impl Default for Code {
 
 /// Converts an `i32` primitive integer to an exit code.
 impl From<i32> for Code {
+    #[inline]
     fn from(n: i32) -> Self {
         Self(n)
     }
@@ -145,6 +158,7 @@ impl From<i32> for Code {
 /// [`ExitStatus::code()`]:
 /// https://doc.rust-lang.org/std/process/struct.ExitStatus.html#method.code
 impl From<std::process::ExitStatus> for Code {
+    #[inline]
     fn from(status: std::process::ExitStatus) -> Self {
         let n = platform_exit_code(status).unwrap_or(Code::default().0);
         From::from(n)
@@ -152,12 +166,14 @@ impl From<std::process::ExitStatus> for Code {
 }
 
 #[cfg(target_family = "unix")]
+#[inline]
 fn platform_exit_code(status: std::process::ExitStatus) -> Option<i32> {
     use std::os::unix::process::ExitStatusExt;
     status.code().or_else(|| status.signal())
 }
 
 #[cfg(not(target_family = "unix"))]
+#[inline]
 fn platform_exit_code(status: std::process::ExitStatus) -> Option<i32> {
     status.code()
 }
