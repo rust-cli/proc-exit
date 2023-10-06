@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/rust-cli/proc-exit/branch/master/graph/badge.svg)](https://codecov.io/gh/rust-cli/proc-exit)
 [![Documentation](https://img.shields.io/badge/docs-master-blue.svg)][Documentation]
 ![License](https://img.shields.io/crates/l/proc-exit.svg)
-[![Crates Status](https://img.shields.io/crates/v/proc-exit.svg)](https://crates.io/crates/proc-exit)
+[![Crates Status](https://img.shields.io/crates/v/proc-exit.svg)][Crates.io]
 
 ## Features
 
@@ -65,8 +65,8 @@ Some crates that fill a similar role include:
 
 Licensed under either of
 
- - Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
- - MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
+* MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
 
 at your option.
 
