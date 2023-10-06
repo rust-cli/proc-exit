@@ -38,7 +38,7 @@ impl Code {
         std::process::exit(self.as_raw())
     }
 
-    /// Convert to [`Result`][std::result::Result]
+    /// Convert to [`Result`]
     #[inline]
     pub fn ok(self) -> crate::ExitResult {
         if self.as_raw() == Self::SUCCESS.as_raw() {
