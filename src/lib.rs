@@ -60,7 +60,7 @@
 //!   - Includes signals
 //!   - Integrates with `std::process` and `std::io::Error`
 //!   - Doesn't integrate with `main`
-//! - [sysexits][sysexits]
+//! - [sysexits]
 //!   - Uses an enum, making certain states unrepresentable
 //!   - Doesn't include signals
 //!   - Doesn't integrate with `main`, `std::process`, or `std::io::Error`
