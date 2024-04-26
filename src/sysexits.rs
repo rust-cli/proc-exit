@@ -48,17 +48,21 @@ impl<T> ToSysexitsResultExt<T> for Result<T, std::io::Error> {
 /// Convert [`std::io::ErrorKind`] to a [`Code`][crate::Code]
 #[inline]
 pub fn io_to_sysexists(kind: std::io::ErrorKind) -> Option<crate::Code> {
-    use std::io::ErrorKind::*;
     match kind {
-        NotFound => Some(OS_FILE_ERR),
-        PermissionDenied => Some(NO_PERM),
-        ConnectionRefused | ConnectionReset | ConnectionAborted | NotConnected => {
-            Some(PROTOCOL_ERR)
+        std::io::ErrorKind::NotFound => Some(OS_FILE_ERR),
+        std::io::ErrorKind::PermissionDenied => Some(NO_PERM),
+        std::io::ErrorKind::ConnectionRefused
+        | std::io::ErrorKind::ConnectionReset
+        | std::io::ErrorKind::ConnectionAborted
+        | std::io::ErrorKind::NotConnected => Some(PROTOCOL_ERR),
+        std::io::ErrorKind::AddrInUse | std::io::ErrorKind::AddrNotAvailable => {
+            Some(SERVICE_UNAVAILABLE)
         }
-        AddrInUse | AddrNotAvailable => Some(SERVICE_UNAVAILABLE),
-        AlreadyExists => Some(CANT_CREAT),
-        InvalidInput | InvalidData | UnexpectedEof => Some(DATA_ERR),
-        WriteZero => Some(NO_INPUT),
+        std::io::ErrorKind::AlreadyExists => Some(CANT_CREAT),
+        std::io::ErrorKind::InvalidInput
+        | std::io::ErrorKind::InvalidData
+        | std::io::ErrorKind::UnexpectedEof => Some(DATA_ERR),
+        std::io::ErrorKind::WriteZero => Some(NO_INPUT),
         _ => None,
     }
 }

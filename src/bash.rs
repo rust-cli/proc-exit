@@ -3,11 +3,10 @@
 /// Convert [`std::io::ErrorKind`] to a [`Code`][crate::Code]
 #[inline]
 pub fn io_to_signal(kind: std::io::ErrorKind) -> Option<crate::Code> {
-    use std::io::ErrorKind::*;
     match kind {
-        BrokenPipe => Some(SIGPIPE),
-        TimedOut => Some(SIGALRM),
-        Interrupted => Some(SIGINT),
+        std::io::ErrorKind::BrokenPipe => Some(SIGPIPE),
+        std::io::ErrorKind::TimedOut => Some(SIGALRM),
+        std::io::ErrorKind::Interrupted => Some(SIGINT),
         _ => None,
     }
 }
@@ -45,7 +44,7 @@ pub const SIGHUP: crate::Code = crate::Code::new(SIGBASE + 1);
 pub const SIGINT: crate::Code = crate::Code::new(SIGBASE + 2);
 
 /// The `SIGQUIT` signal is sent to a process by its controlling terminal
-/// when a user quit from keyboard (Ctrl-\. or, Ctrl-4 or, on the virtual console, the SysRq key)
+/// when a user quit from keyboard (Ctrl-\. or, Ctrl-4 or, on the virtual console, the `SysRq` key)
 pub const SIGQUIT: crate::Code = crate::Code::new(SIGBASE + 3);
 
 /// The `SIGILL` signal is sent to a process by its controlling terminal
