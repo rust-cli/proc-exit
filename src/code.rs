@@ -63,7 +63,7 @@ impl Code {
 
 /// # Introspection and Integration
 impl Code {
-    /// Convert to [`ExitCode][std::process::ExitCode]
+    /// Convert to [`ExitCode`][std::process::ExitCode]
     #[inline]
     pub fn as_exit_code(self) -> Option<std::process::ExitCode> {
         self.as_portable().map(|c| c.into())

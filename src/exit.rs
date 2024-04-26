@@ -24,7 +24,7 @@ impl Exit {
 
 impl std::fmt::Display for Exit {
     #[inline]
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         if let Some(msg) = self.msg.as_ref() {
             msg.fmt(f)
         } else {
@@ -44,7 +44,7 @@ impl std::process::Termination for Exit {
 
 impl std::fmt::Debug for Exit {
     #[inline]
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         // For compatibility with `std::process::Termination`
         std::fmt::Display::fmt(self, f)
     }
