@@ -88,7 +88,7 @@ zero_sized_map_values = "warn"
 
 [package]
 name = "proc-exit"
-version = "2.0.1"
+version = "2.0.2"
 description = "Exit codes for process termination"
 authors = ["Ed Page <eopage@gmail.com>"]
 repository = "https://github.com/rust-cli/proc-exit"
