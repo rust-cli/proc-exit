@@ -79,7 +79,7 @@ pub fn report(result: ExitResult) -> crate::Code {
             if let Some(msg) = err.msg {
                 // At this point, we might be exiting due to a broken pipe, just do our best and
                 // move on.
-                let _ = writeln!(std::io::stderr(), "{}", msg);
+                let _ = writeln!(std::io::stderr(), "{msg}");
             }
             err.code
         }
