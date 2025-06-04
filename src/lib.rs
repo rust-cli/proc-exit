@@ -100,3 +100,7 @@ pub use code::Code;
 pub use exit::WithCodeResultExt;
 pub use exit::{exit, report};
 pub use exit::{Exit, ExitResult};
+
+#[doc = include_str!("../README.md")]
+#[cfg(doctest)]
+pub struct ReadmeDoctests;
