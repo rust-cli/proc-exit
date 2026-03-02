@@ -98,8 +98,8 @@ pub mod sysexits;
 
 pub use code::Code;
 pub use exit::WithCodeResultExt;
-pub use exit::{exit, report};
 pub use exit::{Exit, ExitResult};
+pub use exit::{exit, report};
 
 #[doc = include_str!("../README.md")]
 #[cfg(doctest)]
