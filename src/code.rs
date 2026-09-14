@@ -10,10 +10,10 @@ pub struct Code(i32);
 /// # Create a [`Code`]
 impl Code {
     /// The process exited successfully.
-    pub const SUCCESS: Code = Code(0);
+    pub const SUCCESS: Self = Self(0);
 
     /// Generic failure.
-    pub const FAILURE: Code = Code(1);
+    pub const FAILURE: Self = Self(1);
 
     /// Create a custom error code
     pub const fn new(code: i32) -> Self {
@@ -160,7 +160,7 @@ impl From<i32> for Code {
 impl From<std::process::ExitStatus> for Code {
     #[inline]
     fn from(status: std::process::ExitStatus) -> Self {
-        let n = platform_exit_code(status).unwrap_or(Code::default().0);
+        let n = platform_exit_code(status).unwrap_or(Self::default().0);
         From::from(n)
     }
 }
